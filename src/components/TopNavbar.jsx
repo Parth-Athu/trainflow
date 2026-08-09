@@ -31,7 +31,7 @@ export const TopNavbar = ({
   return (
     <header className="top-navbar">
       {/* LEFT TITLE WITH MOBILE MENU TOGGLE & BRAND LOGO */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0, flex: 1, overflow: 'hidden' }}>
         {/* MOBILE MENU HAMBURGER TRIGGER */}
         <button
           onClick={onToggleMobileMenu}
@@ -45,34 +45,47 @@ export const TopNavbar = ({
           className="mobile-menu-trigger"
           aria-label="Toggle Navigation Menu"
         >
-          <Menu size={22} />
+          <Menu size={20} />
         </button>
 
         {/* LOGO ICON & BREADCRUMB PAGE TITLE */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <TrainFlowLogo size={24} showText={false} />
-          <h1 className="top-navbar-title">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, overflow: 'hidden' }}>
+          <div style={{ flexShrink: 0 }}>
+            <TrainFlowLogo size={22} showText={false} />
+          </div>
+          <h1 
+            className="top-navbar-title" 
+            style={{ 
+              fontSize: '0.98rem', 
+              fontWeight: 800, 
+              color: '#0f172a',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              margin: 0
+            }}
+          >
             {title}
           </h1>
         </div>
       </div>
 
-      {/* RIGHT METRICS & USER CONTROLS */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      {/* RIGHT METRICS & USER CONTROLS (FLEX SHRINK 0 PREVENTS OVERLAP) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
         {/* LOCATION BADGE */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: 5,
+          gap: 4,
           background: '#f1f5f9',
           border: '1px solid #cbd5e1',
           padding: '4px 10px',
           borderRadius: 20,
-          fontSize: '0.75rem',
+          fontSize: '0.74rem',
           fontWeight: 700,
           color: '#334155'
         }}>
-          <MapPin size={13} color="#4f46e5" />
+          <MapPin size={12} color="#4f46e5" />
           <span>{city} Hub</span>
         </div>
 
@@ -86,11 +99,11 @@ export const TopNavbar = ({
             border: '1px solid #fed7aa',
             padding: '4px 10px',
             borderRadius: 20,
-            fontSize: '0.75rem',
+            fontSize: '0.74rem',
             fontWeight: 800,
             color: '#c2410c'
           }}>
-            <Flame size={14} color="#f97316" fill="#f97316" />
+            <Flame size={13} color="#f97316" fill="#f97316" />
             <span>{streakDays} Day Streak</span>
           </div>
         )}
@@ -105,11 +118,11 @@ export const TopNavbar = ({
             border: '1px solid #a7f3d0',
             padding: '4px 10px',
             borderRadius: 20,
-            fontSize: '0.75rem',
+            fontSize: '0.74rem',
             fontWeight: 800,
             color: '#047857'
           }}>
-            <Trophy size={14} color="#10b981" />
+            <Trophy size={13} color="#10b981" />
             <span>{points} XP</span>
           </div>
         )}
@@ -122,8 +135,8 @@ export const TopNavbar = ({
               background: '#f8fafc',
               border: '1px solid #e2e8f0',
               borderRadius: '50%',
-              width: 34,
-              height: 34,
+              width: 32,
+              height: 32,
               display: 'flex',
               alignItems: 'center',
               justify: 'center',
@@ -132,18 +145,18 @@ export const TopNavbar = ({
               position: 'relative'
             }}
           >
-            <Bell size={16} />
+            <Bell size={15} />
             {pendingApprovalsCount > 0 && (
               <span style={{
                 position: 'absolute',
                 top: -2,
                 right: -2,
-                width: 16,
-                height: 16,
+                width: 15,
+                height: 15,
                 borderRadius: '50%',
                 background: '#ef4444',
                 color: '#ffffff',
-                fontSize: '0.65rem',
+                fontSize: '0.62rem',
                 fontWeight: 900,
                 display: 'flex',
                 alignItems: 'center',
@@ -159,7 +172,7 @@ export const TopNavbar = ({
             <div style={{
               position: 'absolute',
               right: 0,
-              top: 42,
+              top: 40,
               width: 280,
               background: '#ffffff',
               border: '1px solid #e2e8f0',
@@ -189,7 +202,7 @@ export const TopNavbar = ({
         <button
           className="btn-secondary"
           onClick={onLogout}
-          style={{ padding: '5px 12px', fontSize: '0.78rem' }}
+          style={{ padding: '5px 11px', fontSize: '0.78rem' }}
         >
           <LogOut size={13} /> Sign Out
         </button>

@@ -6,15 +6,7 @@ import {
   ShieldCheck, 
   Lock, 
   Sparkles, 
-  CheckCircle2, 
-  Video, 
-  Tv, 
-  Zap, 
-  Target, 
-  FileCheck2, 
-  Users, 
-  Award,
-  ArrowRight
+  CheckCircle2
 } from 'lucide-react';
 import { getRecruitBadges } from '../data/badges';
 
@@ -33,21 +25,6 @@ export const AchievementsView = ({ recruit, onNavigateTab }) => {
     maxPoints = 500;
   }
   const levelPercent = Math.min(100, Math.round((points / maxPoints) * 100));
-
-  const renderIcon = (iconName) => {
-    switch (iconName) {
-      case 'Video': return <Video size={20} />;
-      case 'Tv': return <Tv size={20} />;
-      case 'Zap': return <Zap size={20} />;
-      case 'ShieldCheck': return <ShieldCheck size={20} />;
-      case 'Flame': return <Flame size={20} />;
-      case 'Target': return <Target size={20} />;
-      case 'FileCheck2': return <FileCheck2 size={20} />;
-      case 'Users': return <Users size={20} />;
-      case 'Award': return <Award size={20} />;
-      default: return <Trophy size={20} />;
-    }
-  };
 
   return (
     <div className="page-container">
@@ -114,7 +91,7 @@ export const AchievementsView = ({ recruit, onNavigateTab }) => {
               padding: 16,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
+              justify: 'space-between',
               boxShadow: badge.isUnlocked ? '0 2px 6px rgba(0,0,0,0.04)' : 'none',
               opacity: badge.isUnlocked ? 1 : 0.6,
               transition: 'all 0.15s ease'
@@ -122,17 +99,9 @@ export const AchievementsView = ({ recruit, onNavigateTab }) => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                <div style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 10,
-                  background: badge.isUnlocked ? badge.color : '#94a3b8',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justify: 'center'
-                }}>
-                  {renderIcon(badge.icon)}
+                {/* CUSTOM SVG BADGE ICON */}
+                <div style={{ flexShrink: 0 }}>
+                  {badge.svgIcon}
                 </div>
 
                 <span className={`status-badge ${badge.isUnlocked ? 'status-completed' : 'status-locked'}`}>

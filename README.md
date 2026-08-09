@@ -2,19 +2,72 @@
   <img src="public/trainflow_screen_flow.jpg" alt="TrainFlow Workflow Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px;" />
 
   # ⚡ TrainFlow Enterprise Onboarding & Certification SaaS
+  ### 🏆 ARENA 2026 — Techathon | IMS Ahmedabad
+
   **Multi-Branch Training Management, Dynamic Rule Engine & Manager Certification Workflow**
 
   [![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
   [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+  [![Hackathon](https://img.shields.io/badge/ARENA%202026-Techathon-gold?style=for-the-badge)](https://github.com/Parth-Athu/trainflow)
   [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
   [![Status](https://img.shields.io/badge/Production-Ready-success?style=for-the-badge)](https://github.com/Parth-Athu/trainflow)
 </div>
 
 ---
 
-## 📖 Overview
+> **TrainFlow** is an enterprise hackathon project developed by a **5-member team** for **ARENA 2026 — Techathon**, organized by **IMS Ahmedabad**.
 
-**TrainFlow** is a high-performance Enterprise Onboarding & Training Management Platform designed for multi-branch organizations across India. It automates role-based learning path generation, enforces strict completion rules, provides anti-cheating assessment environments, and empowers Branch Managers to review and issue official, verified Certificates of Completion.
+---
+
+## 🏆 Hackathon Project
+
+- **Event:** ARENA 2026 — Techathon  
+- **Organizer:** IMS Ahmedabad  
+- **Team Size:** 5 Members  
+- **Project:** TrainFlow — Enterprise Onboarding & Certification SaaS  
+- **Theme:** Project Launchpad — Multi-Branch Employee Training & Onboarding  
+
+### 🎯 Challenge
+
+The hackathon challenge focused on designing a platform for a fast-growing company operating across **12 branches in India**, where new recruits need role-specific training without requiring employees and senior leaders to travel to a central location.
+
+The solution addresses:
+- **Role-based training assignment** based on employee role and seniority
+- **Multi-branch onboarding** across 12 regional hubs in India
+- **Sequential 4-day training** progression with prerequisite locking
+- **Different learning modules** tailored for different roles and levels
+- **Manager visibility** into recruit progress & performance velocity
+- **Human approval and grading** for practical activities & live sessions
+- **Secure assessments** with anti-cheating window monitoring
+- **Training completion and certification** with unique certificate IDs
+- **HR-level visibility** across all 12 branches nationwide
+- **Configurable rules** without developer involvement
+
+---
+
+### 💡 Our Solution
+
+**TrainFlow** transforms manual, fragmented onboarding into a centralized, role-based digital training workflow.
+
+Instead of giving every recruit the same generic training, TrainFlow dynamically routes candidates:
+
+```text
+Role + Seniority Level
+          ↓
+    Rule Engine
+          ↓
+   Track Assignment
+          ↓
+ Personalized Modules
+          ↓
+   4-Day Curriculum
+          ↓
+ Assessments + Activities
+          ↓
+ Manager Verification
+          ↓
+ Official Certificate (TF-2026-XXXXXX)
+```
 
 ---
 
@@ -44,7 +97,7 @@ flowchart TD
 
 ## 🏛️ Realistic Enterprise Role Hierarchy
 
-TrainFlow establishes a 4-tier operational structure:
+TrainFlow establishes a 4-tier operational hierarchy:
 
 ```
                   ┌────────────────────────┐
@@ -84,7 +137,7 @@ TrainFlow establishes a 4-tier operational structure:
 
 ### 3. 🎯 Dedicated Quiz Session & Security Engine (`QuizSession.jsx`)
 - **Live Countdown Timer**: 10-min situational quizzes & 20-min major assessments.
-- **Question Navigator Pills**: Interactive numbered pills (Q1–Q10) for question jump & review.
+- **Question Navigator Pills**: Numbered pills (Q1–Q10) for question jump & review.
 - **Fisher-Yates Randomization**: Shuffles questions dynamically for each attempt.
 - **Debounced Window Exit Security**: Listens to tab switching & window blur. Triggers Warning 1 & Warning 2 $\rightarrow$ 3rd exit terminates session (`TERMINATED`).
 - **Educational Explanations Breakdown**: Post-quiz summary showing correct vs selected answers with key learning takeaways.
@@ -224,5 +277,5 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 ---
 
 <div align="center">
-  Developed for Enterprise Multi-Branch Training Operations 🚀
+  Developed for ARENA 2026 — Techathon | IMS Ahmedabad 🏆
 </div>

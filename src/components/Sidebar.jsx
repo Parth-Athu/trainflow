@@ -21,6 +21,7 @@ import {
   Activity,
   UserCheck
 } from 'lucide-react';
+import { TrainFlowLogo } from './TrainFlowLogo';
 
 export const Sidebar = ({ 
   activeUser, 
@@ -62,17 +63,9 @@ export const Sidebar = ({
           {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
 
-        {/* SIDEBAR HEADER */}
-        <div className="sidebar-header">
-          <div className="sidebar-logo-icon">
-            <Layers size={22} />
-          </div>
-          {!isCollapsed && (
-            <div>
-              <div className="sidebar-logo-text">TrainFlow</div>
-              <div className="sidebar-logo-sub">ENTERPRISE ONBOARDING</div>
-            </div>
-          )}
+        {/* SIDEBAR HEADER WITH BRAND LOGO */}
+        <div className="sidebar-header" style={{ padding: '20px 22px' }}>
+          <TrainFlowLogo size={32} showText={!isCollapsed} textVariant="light" subtitle="ENTERPRISE ONBOARDING" />
         </div>
 
         {/* ROLE-SPECIFIC NAVIGATION (SCROLLABLE INTERNALLY) */}

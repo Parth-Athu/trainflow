@@ -1,440 +1,565 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
+  Building2, 
+  Users, 
+  ShieldCheck, 
   Layers, 
-  Lock, 
-  Mail, 
-  User, 
-  Briefcase, 
-  MapPin, 
   ArrowRight, 
-  CheckCircle2, 
+  Eye, 
+  EyeOff, 
   Sparkles,
-  ShieldCheck,
-  Building2,
-  GraduationCap,
-  Eye,
-  EyeOff,
   ChevronDown,
-  ChevronUp,
-  Loader2,
-  AlertCircle
+  CheckCircle2,
+  Lock,
+  Zap,
+  Globe,
+  Award
 } from 'lucide-react';
+import gsap from 'gsap';
+import { TrainFlowLogo } from '../components/TrainFlowLogo';
 
 export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset }) => {
-  const [activeTab, setActiveTab] = useState('signin'); // 'signin' | 'register'
-  
-  // Sign In Form State
-  const [email, setEmail] = useState('priya.sharma@trainflow.in');
-  const [password, setPassword] = useState('password123');
-  const [selectedRoleAccount, setSelectedRoleAccount] = useState('recruit');
+  const [authMode, setAuthMode] = useState('login'); // 'login' | 'register'
+  const [selectedRole, setSelectedRole] = useState('recruit'); // 'recruit' | 'manager' | 'trainer' | 'hr'
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [authError, setAuthError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showDemoAccounts, setShowDemoAccounts] = useState(false);
 
-  // Register Form State
-  const [regName, setRegName] = useState('');
+  // Login Form State
+  const [loginEmail, setLoginEmail] = useState('priya.sharma@trainflow.io');
+  const [loginPassword, setLoginPassword] = useState('password123');
+
+  // Registration Form State
+  const [regFullName, setRegFullName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
   const [regMobile, setRegMobile] = useState('');
-  const [regRole, setRegRole] = useState('Sales Executive');
-  const [regLevel, setRegLevel] = useState('Junior');
+  const [regRequestedRole, setRegRequestedRole] = useState('Sales Executive');
+  const [regRequestedLevel, setRegRequestedLevel] = useState('Junior');
   const [regBranch, setRegBranch] = useState('Ahmedabad');
 
-  // Collapsible Demo Section
-  const [showDemoAccounts, setShowDemoAccounts] = useState(true);
+  const containerRef = useRef(null);
+  const blob1Ref = useRef(null);
+  const blob2Ref = useRef(null);
+  const blob3Ref = useRef(null);
 
-  const handleSignInSubmit = (e) => {
+  // GSAP BACKGROUND & STAGGER ENTRANCE ANIMATIONS
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Ambient floating blobs background motion
+      gsap.to(blob1Ref.current, {
+        y: 45,
+        x: -30,
+        rotation: 15,
+        duration: 9,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      gsap.to(blob2Ref.current, {
+        y: -50,
+        x: 40,
+        rotation: -20,
+        duration: 11,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      gsap.to(blob3Ref.current, {
+        scale: 1.25,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut'
+      });
+
+      // Stagger entrance animation for content cards
+      gsap.from('.gsap-animate-card', {
+        opacity: 0,
+        y: 35,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: 'power3.out'
+      });
+
+      // Header logo pulse
+      gsap.from('.gsap-logo', {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        ease: 'back.out(1.7)'
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [authMode]);
+
+  // Handle Account Type dropdown change
+  const handleRoleChange = (e) => {
+    const newRole = e.target.value;
+    setSelectedRole(newRole);
+
+    if (newRole === 'recruit') {
+      setLoginEmail('priya.sharma@trainflow.io');
+    } else if (newRole === 'manager') {
+      setLoginEmail('manager.ahmedabad@trainflow.io');
+    } else if (newRole === 'trainer') {
+      setLoginEmail('trainer@trainflow.io');
+    } else if (newRole === 'hr') {
+      setLoginEmail('hr.admin@trainflow.io');
+    }
+  };
+
+  // Submit Login Handler
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
-    setAuthError(null);
-
-    if (!email || !email.includes('@')) {
-      setAuthError('Please enter a valid work email address.');
-      return;
-    }
-
-    if (!password) {
-      setAuthError('Please enter your password.');
-      return;
-    }
-
-    setIsSubmitting(true);
-
+    setIsLoading(true);
     setTimeout(() => {
-      setIsSubmitting(false);
-      onLoginSuccess(email, password, selectedRoleAccount);
+      setIsLoading(false);
+      onLoginSuccess(loginEmail, loginPassword, selectedRole);
     }, 600);
   };
 
+  // Submit Registration Handler
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    if (!regName || !regEmail) return;
-
-    setIsSubmitting(true);
-
+    setIsLoading(true);
     setTimeout(() => {
-      setIsSubmitting(false);
+      setIsLoading(false);
       onRegisterSuccess({
-        name: regName,
+        name: regFullName,
         email: regEmail,
-        password: regPassword || 'password123',
-        mobile: regMobile || '+91 98765 43210',
-        role: regRole,
-        level: regLevel,
+        password: regPassword,
+        mobile: regMobile,
+        requestedRole: regRequestedRole,
+        requestedLevel: regRequestedLevel,
         city: regBranch
       });
-    }, 600);
+    }, 700);
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '40px 20px',
-      color: '#ffffff',
-      fontFamily: 'Plus Jakarta Sans, sans-serif'
-    }}>
-      <div style={{ maxWidth: 1100, width: '100%', display: 'grid', gridTemplateColumns: '45% 55%', gap: 40, alignItems: 'center' }}>
-        
-        {/* LEFT PANEL: BRAND & CONCISE VALUE PROPOSITION */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-            <div style={{ width: 46, height: 46, background: '#4f46e5', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 25px rgba(79,70,229,0.5)' }}>
-              <Layers size={28} color="#ffffff" />
+    <div 
+      ref={containerRef}
+      style={{
+        minHeight: '100vh',
+        width: '100%',
+        background: '#090d16',
+        color: '#ffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justify: 'center',
+        padding: '30px 20px',
+        position: 'relative',
+        overflow: 'hidden',
+        fontFamily: "'Inter', system-ui, sans-serif"
+      }}
+    >
+      {/* GSAP FLOATING AMBIENT BACKGROUND BLOBS */}
+      <div 
+        ref={blob1Ref}
+        className="gsap-blob-1"
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          left: '-5%',
+          width: 500,
+          height: 500,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(79,70,229,0.3) 0%, rgba(124,58,237,0.15) 60%, rgba(0,0,0,0) 80%)',
+          filter: 'blur(70px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+
+      <div 
+        ref={blob2Ref}
+        className="gsap-blob-2"
+        style={{
+          position: 'absolute',
+          bottom: '-15%',
+          right: '-5%',
+          width: 550,
+          height: 550,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(79,70,229,0.15) 60%, rgba(0,0,0,0) 80%)',
+          filter: 'blur(80px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+
+      <div 
+        ref={blob3Ref}
+        className="gsap-blob-3"
+        style={{
+          position: 'absolute',
+          top: '35%',
+          left: '45%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(236,72,153,0.15) 0%, rgba(0,0,0,0) 70%)',
+          filter: 'blur(90px)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+
+      {/* TWO-COLUMN ENTERPRISE SAAS LOGIN CONTAINER */}
+      <div 
+        style={{
+          width: '100%',
+          maxWidth: 1120,
+          display: 'grid',
+          gridTemplateColumns: '45% 55%',
+          background: 'rgba(15, 23, 42, 0.75)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
+          borderRadius: 24,
+          overflow: 'hidden',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.5)',
+          position: 'relative',
+          zIndex: 1
+        }}
+      >
+        {/* LEFT COLUMN: BRAND PROPOSITION & VALUE CARDS */}
+        <div 
+          style={{
+            background: 'linear-gradient(160deg, rgba(30, 27, 75, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
+            padding: 44,
+            display: 'flex',
+            flexDirection: 'column',
+            justify: 'space-between',
+            borderRight: '1px solid rgba(255, 255, 255, 0.08)'
+          }}
+        >
+          <div>
+            {/* BRAND LOGO HEADER */}
+            <div className="gsap-logo" style={{ marginBottom: 32 }}>
+              <TrainFlowLogo size={42} showText={true} textVariant="light" subtitle="ENTERPRISE ONBOARDING & CERTIFICATION" />
             </div>
-            <div>
-              <h1 style={{ fontSize: '1.9rem', fontWeight: 900, color: '#ffffff', letterSpacing: -0.5 }}>TrainFlow</h1>
-              <div style={{ fontSize: '0.75rem', color: '#a5b4fc', textTransform: 'uppercase', letterSpacing: 1.5, fontWeight: 800 }}>
-                ENTERPRISE MULTI-BRANCH ONBOARDING PLATFORM
+
+            <h1 className="gsap-animate-card" style={{ fontSize: '1.9rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.3, marginBottom: 12 }}>
+              Automated Role-Based Onboarding Across <span style={{ background: 'linear-gradient(90deg, #818cf8 0%, #34d399 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>12 Indian Branch Hubs</span>
+            </h1>
+
+            <p className="gsap-animate-card" style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: 32 }}>
+              Transform manual orientation into a high-impact 4-day digital training path. Powered by an enterprise Rule Engine, anti-cheating assessments, and manager certification desks.
+            </p>
+
+            {/* 3 VALUE CARDS */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: 16, borderRadius: 14, display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: '#4f46e5', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Zap size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>Role-Based Rule Engine</div>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: 2 }}>Auto-assigns specialist sub-modules based on position & level.</div>
+                </div>
+              </div>
+
+              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: 16, borderRadius: 14, display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: '#10b981', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <ShieldCheck size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>Controlled Assessment Center</div>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: 2 }}>Attention monitoring, timer tracking, and Fisher-Yates question shuffle.</div>
+                </div>
+              </div>
+
+              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: 16, borderRadius: 14, display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: '#7c3aed', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Award size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>Branch Manager Certification</div>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: 2 }}>Verified 100% eligibility check before issuing stable Certificate IDs.</div>
+                </div>
               </div>
             </div>
           </div>
 
-          <h2 style={{ fontSize: '2.3rem', fontWeight: 900, lineHeight: 1.2, color: '#ffffff', marginBottom: 16 }}>
-            Automated Role-Based Onboarding Across 12 Regional Hubs
-          </h2>
-
-          <p style={{ fontSize: '0.95rem', color: '#cbd5e1', lineHeight: 1.6, marginBottom: 28 }}>
-            TrainFlow automatically assigns personalized training paths based on role, level, and branch — while giving managers and HR complete visibility.
-          </p>
-
-          {/* 3 CONCISE VALUE CARDS */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 14, borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <CheckCircle2 size={20} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>✓ Role-Based Learning</div>
-                <div style={{ fontSize: '0.82rem', color: '#a5b4fc', marginTop: 2 }}>Role + Level automatically determines training curriculum.</div>
-              </div>
-            </div>
-
-            <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 14, borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <CheckCircle2 size={20} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>✓ Controlled Assessments</div>
-                <div style={{ fontSize: '0.82rem', color: '#a5b4fc', marginTop: 2 }}>Secure fullscreen assessments with integrity monitoring.</div>
-              </div>
-            </div>
-
-            <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 14, borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <CheckCircle2 size={20} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff' }}>✓ Multi-Branch Management</div>
-                <div style={{ fontSize: '0.82rem', color: '#a5b4fc', marginTop: 2 }}>Supervise onboarding across all 12 regional hubs.</div>
-              </div>
-            </div>
+          <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between' }}>
+            <span>ARENA 2026 — Techathon | IMS Ahmedabad</span>
+            <span>v4.0 Production</span>
           </div>
         </div>
 
-        {/* RIGHT PANEL: ENTERPRISE AUTHENTICATION CARD */}
-        <div style={{ background: '#ffffff', color: '#0f172a', borderRadius: 24, padding: 36, boxShadow: '0 20px 40px rgba(0,0,0,0.3)', border: '1px solid #cbd5e1' }}>
-          
-          {/* TABS HEADER */}
-          <div style={{ display: 'flex', background: '#f1f5f9', padding: 4, borderRadius: 12, marginBottom: 24 }}>
+        {/* RIGHT COLUMN: AUTHENTICATION PANEL */}
+        <div style={{ padding: 44, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          {/* TAB MODE SWITCHER */}
+          <div className="gsap-animate-card" style={{ display: 'flex', background: 'rgba(255,255,255,0.06)', padding: 4, borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', marginBottom: 28 }}>
             <button
-              onClick={() => { setActiveTab('signin'); setAuthError(null); }}
+              onClick={() => setAuthMode('login')}
               style={{
                 flex: 1,
                 padding: '10px 0',
-                borderRadius: 9,
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                background: activeTab === 'signin' ? '#ffffff' : 'transparent',
-                color: activeTab === 'signin' ? '#4f46e5' : '#64748b',
-                boxShadow: activeTab === 'signin' ? '0 2px 4px rgba(0,0,0,0.08)' : 'none',
+                borderRadius: 8,
                 border: 'none',
-                cursor: 'pointer'
+                background: authMode === 'login' ? '#4f46e5' : 'transparent',
+                color: '#ffffff',
+                fontWeight: 800,
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
               }}
             >
               Sign In
             </button>
+
             <button
-              onClick={() => { setActiveTab('register'); setAuthError(null); }}
+              onClick={() => setAuthMode('register')}
               style={{
                 flex: 1,
                 padding: '10px 0',
-                borderRadius: 9,
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                background: activeTab === 'register' ? '#ffffff' : 'transparent',
-                color: activeTab === 'register' ? '#4f46e5' : '#64748b',
-                boxShadow: activeTab === 'register' ? '0 2px 4px rgba(0,0,0,0.08)' : 'none',
+                borderRadius: 8,
                 border: 'none',
-                cursor: 'pointer'
+                background: authMode === 'register' ? '#4f46e5' : 'transparent',
+                color: '#ffffff',
+                fontWeight: 800,
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
               }}
             >
-              Recruit Self-Register
+              Recruit Registration
             </button>
           </div>
 
-          {/* INLINE ERROR DISPLAY */}
-          {authError && (
-            <div style={{ background: '#fef2f2', border: '1px solid #fca5a5', color: '#991b1b', padding: '10px 14px', borderRadius: 10, fontSize: '0.85rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <AlertCircle size={16} /> {authError}
-            </div>
-          )}
-
-          {activeTab === 'signin' ? (
-            <form onSubmit={handleSignInSubmit}>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>Welcome Back</h3>
-              <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: 20 }}>Sign in to your TrainFlow portal</p>
-
+          {authMode === 'login' ? (
+            /* LOGIN FORM */
+            <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {/* ACCOUNT TYPE SELECTOR */}
-              <div className="form-group">
-                <label className="form-label">Account Type</label>
+              <div className="gsap-animate-card">
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', marginBottom: 6 }}>
+                  Account Type
+                </label>
                 <select
-                  className="form-select"
-                  value={selectedRoleAccount}
-                  onChange={e => setSelectedRoleAccount(e.target.value)}
-                  style={{ fontWeight: 700, color: '#4f46e5' }}
+                  value={selectedRole}
+                  onChange={handleRoleChange}
+                  style={{
+                    width: '100%',
+                    padding: '12px 14px',
+                    borderRadius: 10,
+                    background: 'rgba(30, 41, 59, 0.9)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    color: '#ffffff',
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    outline: 'none',
+                    cursor: 'pointer'
+                  }}
                 >
-                  <option value="recruit">Recruit Portal</option>
-                  <option value="manager">Branch Manager Portal</option>
-                  <option value="trainer">Trainer Portal</option>
-                  <option value="hr">HR Admin Portal</option>
+                  <option value="recruit" style={{ background: '#0f172a' }}>Recruit (Employee Onboarding)</option>
+                  <option value="manager" style={{ background: '#0f172a' }}>Branch Manager (Ahmedabad Hub)</option>
+                  <option value="trainer" style={{ background: '#0f172a' }}>Regional Trainer (Field Sign-offs)</option>
+                  <option value="hr" style={{ background: '#0f172a' }}>HQ HR Admin (National Command)</option>
                 </select>
-                <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: 4 }}>
-                  Your dashboard permissions are determined by your account role.
-                </div>
               </div>
 
               {/* WORK EMAIL */}
-              <div className="form-group">
-                <label className="form-label">Work Email Address</label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={16} style={{ position: 'absolute', left: 14, top: 13, color: '#94a3b8' }} />
-                  <input
-                    type="email"
-                    className="form-input"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    style={{ paddingLeft: 40 }}
-                    required
-                  />
-                </div>
+              <div className="gsap-animate-card">
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
+                  Work Email Address
+                </label>
+                <input
+                  type="email"
+                  value={loginEmail}
+                  onChange={e => setLoginEmail(e.target.value)}
+                  placeholder="e.g. priya.sharma@trainflow.io"
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '12px 14px',
+                    borderRadius: 10,
+                    background: 'rgba(30, 41, 59, 0.9)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    color: '#ffffff',
+                    fontSize: '0.92rem',
+                    outline: 'none'
+                  }}
+                />
               </div>
 
-              {/* PASSWORD WITH SHOW/HIDE TOGGLE */}
-              <div className="form-group" style={{ marginBottom: 20 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                  <label className="form-label" style={{ marginBottom: 0 }}>Password</label>
-                  <a href="#forgot" onClick={e => e.preventDefault()} style={{ fontSize: '0.78rem', color: '#4f46e5', fontWeight: 700, textDecoration: 'none' }}>
-                    Forgot password?
-                  </a>
-                </div>
+              {/* PASSWORD WITH SHOW/HIDE EYE */}
+              <div className="gsap-animate-card">
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
+                  Password
+                </label>
                 <div style={{ position: 'relative' }}>
-                  <Lock size={16} style={{ position: 'absolute', left: 14, top: 13, color: '#94a3b8' }} />
                   <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-input"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    style={{ paddingLeft: 40, paddingRight: 40 }}
+                    type={showPassword ? 'text' : 'password'}
+                    value={loginPassword}
+                    onChange={e => setLoginPassword(e.target.value)}
+                    placeholder="••••••••"
                     required
+                    style={{
+                      width: '100%',
+                      padding: '12px 42px 12px 14px',
+                      borderRadius: 10,
+                      background: 'rgba(30, 41, 59, 0.9)',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                      color: '#ffffff',
+                      fontSize: '0.92rem',
+                      outline: 'none'
+                    }}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    style={{ position: 'absolute', right: 12, top: 12, background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}
+                    style={{
+                      position: 'absolute',
+                      right: 12,
+                      top: 12,
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#94a3b8',
+                      cursor: 'pointer'
+                    }}
                   >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
 
-              {/* SUBMIT BUTTON WITH SPINNER */}
+              {/* SUBMIT BUTTON */}
               <button
-                className="btn-primary"
                 type="submit"
-                disabled={isSubmitting}
-                style={{ width: '100%', justifyContent: 'center', padding: 12, fontSize: '0.95rem' }}
+                disabled={isLoading}
+                className="gsap-animate-card"
+                style={{
+                  width: '100%',
+                  padding: 14,
+                  borderRadius: 10,
+                  border: 'none',
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  fontSize: '0.98rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justify: 'center',
+                  gap: 8,
+                  boxShadow: '0 8px 20px rgba(79, 70, 229, 0.4)',
+                  marginTop: 6,
+                  transition: 'transform 0.15s ease'
+                }}
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={18} className="spin-animated" /> Signing in...
-                  </>
+                {isLoading ? (
+                  <span>Signing in...</span>
                 ) : (
                   <>
-                    Sign In to Account <ArrowRight size={16} />
+                    Sign In to TrainFlow <ArrowRight size={18} />
                   </>
                 )}
               </button>
+
+              {/* DEMO ACCOUNTS ACCORDION TOGGLE */}
+              <div className="gsap-animate-card" style={{ marginTop: 12 }}>
+                <button
+                  type="button"
+                  onClick={() => setShowDemoAccounts(!showDemoAccounts)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#a5b4fc',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    margin: '0 auto'
+                  }}
+                >
+                  <Sparkles size={14} /> Quick Demo Account Shortcuts {showDemoAccounts ? '▲' : '▼'}
+                </button>
+
+                {showDemoAccounts && (
+                  <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8, background: 'rgba(255,255,255,0.04)', padding: 12, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedRole('recruit'); setLoginEmail('priya.sharma@trainflow.io'); onQuickLoginPreset({ role: 'recruit', recruitId: 'R-01', name: 'Priya Sharma (R-01)' }); }}
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: 8, borderRadius: 6, fontSize: '0.8rem', textAlign: 'left', cursor: 'pointer' }}
+                    >
+                      👤 Recruit: <strong>Priya Sharma (Sales Executive)</strong>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedRole('manager'); setLoginEmail('manager.ahmedabad@trainflow.io'); onQuickLoginPreset({ role: 'manager', name: 'Amit Shah (Branch Manager)' }); }}
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: 8, borderRadius: 6, fontSize: '0.8rem', textAlign: 'left', cursor: 'pointer' }}
+                    >
+                      👔 Manager: <strong>Amit Shah (Ahmedabad Hub)</strong>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedRole('hr'); setLoginEmail('hr.admin@trainflow.io'); onQuickLoginPreset({ role: 'hr', name: 'HQ HR Operations' }); }}
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: 8, borderRadius: 6, fontSize: '0.8rem', textAlign: 'left', cursor: 'pointer' }}
+                    >
+                      🏢 HR Admin: <strong>HQ HR Operations</strong>
+                    </button>
+                  </div>
+                )}
+              </div>
             </form>
           ) : (
-            <form onSubmit={handleRegisterSubmit}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: 2 }}>Recruit Self-Registration</h3>
-              <p style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: 14 }}>
-                Submitting sends an application to your assigned Branch Manager for role approval.
-              </p>
-
-              <div className="form-group" style={{ marginBottom: 10 }}>
-                <label className="form-label">Full Name</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="e.g. Rahul Patel"
-                  value={regName}
-                  onChange={e => setRegName(e.target.value)}
-                  required
-                />
+            /* RECRUIT REGISTRATION FORM */
+            <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div className="gsap-animate-card">
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Full Name</label>
+                <input type="text" value={regFullName} onChange={e => setRegFullName(e.target.value)} placeholder="e.g. Vikram Patel" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
               </div>
 
-              <div className="form-group" style={{ marginBottom: 10 }}>
-                <label className="form-label">Work Email</label>
-                <input
-                  type="email"
-                  className="form-input"
-                  placeholder="rahul.patel@trainflow.in"
-                  value={regEmail}
-                  onChange={e => setRegEmail(e.target.value)}
-                  required
-                />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }} className="gsap-animate-card">
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Work Email</label>
+                  <input type="email" value={regEmail} onChange={e => setRegEmail(e.target.value)} placeholder="vikram@trainflow.io" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Mobile</label>
+                  <input type="tel" value={regMobile} onChange={e => setRegMobile(e.target.value)} placeholder="+91 9876543210" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label className="form-label">Job Role</label>
-                  <select className="form-select" value={regRole} onChange={e => setRegRole(e.target.value)}>
-                    <option value="Sales Executive">Sales Executive</option>
-                    <option value="Operations Associate">Operations Associate</option>
-                    <option value="Marketing Associate">Marketing Associate</option>
-                    <option value="Delivery Lead">Delivery Lead</option>
-                    <option value="Customer Support">Customer Support</option>
-                    <option value="Branch Manager">Branch Manager</option>
-                    <option value="Area Head">Area Head</option>
-                    <option value="Regional Manager">Regional Manager</option>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }} className="gsap-animate-card">
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Requested Role</label>
+                  <select value={regRequestedRole} onChange={e => setRegRequestedRole(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }}>
+                    <option value="Sales Executive" style={{ background: '#0f172a' }}>Sales Executive</option>
+                    <option value="Operations Associate" style={{ background: '#0f172a' }}>Operations Associate</option>
+                    <option value="Marketing Associate" style={{ background: '#0f172a' }}>Marketing Associate</option>
+                    <option value="Delivery Lead" style={{ background: '#0f172a' }}>Delivery Lead</option>
+                    <option value="Customer Support" style={{ background: '#0f172a' }}>Customer Support</option>
                   </select>
                 </div>
-
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label className="form-label">Seniority Level</label>
-                  <select className="form-select" value={regLevel} onChange={e => setRegLevel(e.target.value)}>
-                    <option value="Junior">Junior</option>
-                    <option value="Mid">Mid</option>
-                    <option value="Senior">Senior</option>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Level & Branch</label>
+                  <select value={regBranch} onChange={e => setRegBranch(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }}>
+                    <option value="Ahmedabad" style={{ background: '#0f172a' }}>Ahmedabad Hub</option>
+                    <option value="Surat" style={{ background: '#0f172a' }}>Surat Hub</option>
+                    <option value="Rajkot" style={{ background: '#0f172a' }}>Rajkot Hub</option>
+                    <option value="Vadodara" style={{ background: '#0f172a' }}>Vadodara Hub</option>
                   </select>
                 </div>
               </div>
 
-              <div className="form-group" style={{ marginBottom: 16 }}>
-                <label className="form-label">Branch Hub</label>
-                <select className="form-select" value={regBranch} onChange={e => setRegBranch(e.target.value)}>
-                  <option value="Ahmedabad">Ahmedabad Hub</option>
-                  <option value="Surat">Surat Hub</option>
-                  <option value="Rajkot">Rajkot Hub</option>
-                  <option value="Vadodara">Vadodara Hub</option>
-                  <option value="Bhavnagar">Bhavnagar Hub</option>
-                  <option value="Jamnagar">Jamnagar Hub</option>
-                  <option value="Junagadh">Junagadh Hub</option>
-                  <option value="Gandhinagar">Gandhinagar Hub</option>
-                  <option value="Anand">Anand Hub</option>
-                  <option value="Mehsana">Mehsana Hub</option>
-                  <option value="Jaipur">Jaipur Hub</option>
-                  <option value="Indore">Indore Hub</option>
-                </select>
+              <div className="gsap-animate-card">
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Password</label>
+                <input type="password" value={regPassword} onChange={e => setRegPassword(e.target.value)} placeholder="••••••••" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
               </div>
 
-              <button className="btn-primary" type="submit" disabled={isSubmitting} style={{ width: '100%', justifyContent: 'center', padding: 12, fontSize: '0.92rem' }}>
-                {isSubmitting ? <Loader2 size={18} className="spin-animated" /> : 'Create Recruit Account'}
+              <button type="submit" disabled={isLoading} className="gsap-animate-card" style={{ width: '100%', padding: 12, borderRadius: 8, border: 'none', background: '#10b981', color: '#ffffff', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', marginTop: 6 }}>
+                Submit Application for Manager Review
               </button>
             </form>
           )}
-
-          {/* ⚡ COLLAPSIBLE DEMO ACCOUNTS SECTION */}
-          <div style={{ marginTop: 24, borderTop: '1px solid #e2e8f0', paddingTop: 16 }}>
-            <button
-              type="button"
-              onClick={() => setShowDemoAccounts(!showDemoAccounts)}
-              style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justify: 'space-between',
-                background: 'none',
-                border: 'none',
-                fontSize: '0.8rem',
-                fontWeight: 800,
-                color: '#64748b',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                letterSpacing: 0.5
-              }}
-            >
-              <span>⚡ Demo Accounts Shortcuts</span>
-              {showDemoAccounts ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-            </button>
-
-            {showDemoAccounts && (
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 12, animation: 'slideIn 0.2s ease-out' }}>
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => onQuickLoginPreset({ role: 'recruit', recruitId: 'R-01', name: 'Priya Sharma (R-01)' })}
-                  style={{ padding: '6px 10px', fontSize: '0.78rem', justifyContent: 'flex-start' }}
-                >
-                  👤 Approved Recruit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => onQuickLoginPreset({ role: 'recruit', recruitId: 'R-11', name: 'Rahul Patel (R-11)' })}
-                  style={{ padding: '6px 10px', fontSize: '0.78rem', justifyContent: 'flex-start', color: '#b45309', borderColor: '#fde68a' }}
-                >
-                  ⏳ Pending Recruit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => onQuickLoginPreset({ role: 'manager', name: 'Amit Shah (Branch Mgr)' })}
-                  style={{ padding: '6px 10px', fontSize: '0.78rem', justifyContent: 'flex-start' }}
-                >
-                  🏢 Branch Manager
-                </button>
-
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => onQuickLoginPreset({ role: 'trainer', name: 'Regional Trainer' })}
-                  style={{ padding: '6px 10px', fontSize: '0.78rem', justifyContent: 'flex-start' }}
-                >
-                  🎓 Field Trainer
-                </button>
-
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={() => onQuickLoginPreset({ role: 'hr', name: 'HQ HR Operations' })}
-                  style={{ padding: '6px 10px', fontSize: '0.78rem', justifyContent: 'center', gridColumn: 'span 2', background: '#312e81', borderColor: '#312e81' }}
-                >
-                  🌐 HR Admin (National Command)
-                </button>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>

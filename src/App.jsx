@@ -354,6 +354,8 @@ export function App() {
                 ? activeModule.title 
                 : isPendingApproval
                 ? 'Registration Pending Branch Approval'
+                : currentTab === 'quiz'
+                ? 'Interactive Situational Quiz Session'
                 : currentTab === 'profile'
                 ? 'Recruit Employee Profile'
                 : currentTab === 'achievements'
@@ -395,6 +397,17 @@ export function App() {
               <PendingApprovalView
                 recruit={currentRecruit}
                 onSimulateHRApprove={(recId) => handleApproveRecruitByManager(recId, 'Sales Executive', 'Junior', 'Ahmedabad Branch Manager')}
+              />
+            ) : currentTab === 'quiz' ? (
+              <ModulePage
+                module={getLearningPath(currentRecruit, rules).find(m => m.id === 'M-C03') || getLearningPath(currentRecruit, rules)[2]}
+                recruit={currentRecruit}
+                onBack={() => setCurrentTab('dashboard')}
+                onCompleteModule={handleCompleteModule}
+                onSubmitActivity={handleSubmitActivity}
+                onTriggerSignOff={(modId, signedBy) => handleSignOffLive(currentRecruit.id, modId, signedBy)}
+                onSaveAssessmentAttempt={handleSaveAssessmentAttempt}
+                onAwardXP={handleAwardXP}
               />
             ) : currentTab === 'profile' ? (
               <RecruitProfile

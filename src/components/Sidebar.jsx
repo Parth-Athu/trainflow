@@ -19,7 +19,8 @@ import {
   History,
   Trophy,
   Activity,
-  UserCheck
+  UserCheck,
+  Target
 } from 'lucide-react';
 import { TrainFlowLogo } from './TrainFlowLogo';
 
@@ -68,7 +69,7 @@ export const Sidebar = ({
           <TrainFlowLogo size={32} showText={!isCollapsed} textVariant="light" subtitle="ENTERPRISE ONBOARDING" />
         </div>
 
-        {/* ROLE-SPECIFIC NAVIGATION (SCROLLABLE INTERNALLY) */}
+        {/* ROLE-SPECIFIC NAVIGATION */}
         <div className="sidebar-nav-container">
           {/* RECRUIT PORTAL */}
           {isRecruit && (
@@ -82,6 +83,15 @@ export const Sidebar = ({
               >
                 <BookOpen size={18} />
                 <span className="nav-text">My Learning Path</span>
+              </button>
+
+              <button
+                className={`nav-item ${currentTab === 'quiz' ? 'active' : ''}`}
+                onClick={() => handleNavClick('quiz')}
+                title="Situational Quiz"
+              >
+                <Target size={18} color="#ec4899" />
+                <span className="nav-text">Situational Quiz 🎯</span>
               </button>
 
               <button

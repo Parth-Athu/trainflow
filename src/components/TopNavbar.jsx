@@ -1,123 +1,184 @@
 import React, { useState } from 'react';
 import { 
   Bell, 
-  LogOut, 
-  User, 
   MapPin, 
   Flame, 
   Trophy, 
-  Menu, 
-  X,
-  ShieldCheck,
-  CheckCircle2,
+  LogOut, 
+  ChevronDown, 
+  User, 
+  ShieldCheck, 
   Sparkles,
-  ChevronDown
+  Menu,
+  X
 } from 'lucide-react';
+import { TrainFlowLogo } from './TrainFlowLogo';
 
 export const TopNavbar = ({ 
   title, 
   activeUser, 
   recruit, 
-  onLogout, 
+  onLogout,
   pendingApprovalsCount = 0,
-  onToggleMobileMenu 
+  onToggleMobileMenu
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
 
-  const isRecruit = activeUser.role === 'recruit';
-  const isManager = activeUser.role === 'manager';
-  const isTrainer = activeUser.role === 'trainer';
-  const isHR = activeUser.role === 'hr';
-
-  const userCity = isRecruit ? (recruit?.city || 'Ahmedabad') : isManager ? 'Ahmedabad' : 'HQ Operations';
+  const city = recruit?.city || 'Ahmedabad';
+  const points = recruit?.points || 680;
+  const streakDays = recruit?.streakDays || 4;
 
   return (
     <header className="top-navbar">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        {/* MOBILE HAMBURGER MENU TRIGGER */}
+      {/* LEFT TITLE WITH MOBILE MENU TOGGLE & BRAND LOGO */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* MOBILE MENU HAMBURGER TRIGGER */}
         <button
-          className="icon-btn mobile-menu-trigger"
           onClick={onToggleMobileMenu}
-          title="Open Menu"
-          aria-label="Open Menu"
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: '#334155',
+            cursor: 'pointer',
+            display: 'none'
+          }}
+          className="mobile-menu-trigger"
+          aria-label="Toggle Navigation Menu"
         >
-          <Menu size={20} />
+          <Menu size={22} />
         </button>
 
-        <h1 className="topbar-title">{title}</h1>
+        {/* LOGO ICON & BREADCRUMB PAGE TITLE */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <TrainFlowLogo size={24} showText={false} />
+          <h1 className="top-navbar-title">
+            {title}
+          </h1>
+        </div>
       </div>
 
-      <div className="topbar-right">
-        {/* BRANCH LOCATION BADGE */}
-        <div className="topbar-badge">
-          <MapPin size={14} /> {userCity} Hub
+      {/* RIGHT METRICS & USER CONTROLS */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* LOCATION BADGE */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 5,
+          background: '#f1f5f9',
+          border: '1px solid #cbd5e1',
+          padding: '4px 10px',
+          borderRadius: 20,
+          fontSize: '0.75rem',
+          fontWeight: 700,
+          color: '#334155'
+        }}>
+          <MapPin size={13} color="#4f46e5" />
+          <span>{city} Hub</span>
         </div>
 
-        {/* STREAK & XP BADGES FOR RECRUIT */}
-        {isRecruit && recruit && (
-          <>
-            <div className="topbar-badge" style={{ background: '#fff7ed', color: '#ea580c' }}>
-              <Flame size={14} className="fire-animated" /> {recruit.streakDays || 4} Day Streak
-            </div>
+        {/* STREAK BADGE */}
+        {activeUser.role === 'recruit' && (
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            background: '#fff7ed',
+            border: '1px solid #fed7aa',
+            padding: '4px 10px',
+            borderRadius: 20,
+            fontSize: '0.75rem',
+            fontWeight: 800,
+            color: '#c2410c'
+          }}>
+            <Flame size={14} color="#f97316" fill="#f97316" />
+            <span>{streakDays} Day Streak</span>
+          </div>
+        )}
 
-            <div className="topbar-badge" style={{ background: '#ecfdf5', color: '#047857' }}>
-              <Trophy size={14} /> {recruit.points || 680} XP
-            </div>
-          </>
+        {/* XP BADGE */}
+        {activeUser.role === 'recruit' && (
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            background: '#ecfdf5',
+            border: '1px solid #a7f3d0',
+            padding: '4px 10px',
+            borderRadius: 20,
+            fontSize: '0.75rem',
+            fontWeight: 800,
+            color: '#047857'
+          }}>
+            <Trophy size={14} color="#10b981" />
+            <span>{points} XP</span>
+          </div>
         )}
 
         {/* NOTIFICATIONS BELL */}
         <div style={{ position: 'relative' }}>
           <button
-            className="icon-btn"
             onClick={() => setShowNotifications(!showNotifications)}
-            title="Notifications"
-            aria-label="Notifications"
-            style={{ position: 'relative' }}
+            style={{
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '50%',
+              width: 34,
+              height: 34,
+              display: 'flex',
+              alignItems: 'center',
+              justify: 'center',
+              cursor: 'pointer',
+              color: '#475569',
+              position: 'relative'
+            }}
           >
-            <Bell size={18} />
+            <Bell size={16} />
             {pendingApprovalsCount > 0 && (
               <span style={{
                 position: 'absolute',
-                top: 4,
-                right: 4,
-                width: 8,
-                height: 8,
+                top: -2,
+                right: -2,
+                width: 16,
+                height: 16,
+                borderRadius: '50%',
                 background: '#ef4444',
-                borderRadius: '50%'
-              }} />
+                color: '#ffffff',
+                fontSize: '0.65rem',
+                fontWeight: 900,
+                display: 'flex',
+                alignItems: 'center',
+                justify: 'center'
+              }}>
+                {pendingApprovalsCount}
+              </span>
             )}
           </button>
 
-          {/* NOTIFICATIONS POPOVER */}
+          {/* NOTIFICATION POPOVER */}
           {showNotifications && (
             <div style={{
               position: 'absolute',
               right: 0,
-              top: 48,
-              width: 320,
+              top: 42,
+              width: 280,
               background: '#ffffff',
+              border: '1px solid #e2e8f0',
               borderRadius: 12,
-              boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-              border: '1px solid #cbd5e1',
-              padding: 16,
-              zIndex: 2000,
-              fontSize: '0.85rem'
+              boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+              padding: 14,
+              zIndex: 1000
             }}>
-              <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span>Notifications</span>
-                <button onClick={() => setShowNotifications(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={14} color="#64748b" /></button>
+              <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#0f172a', marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>Notifications ({pendingApprovalsCount})</span>
+                <X size={14} style={{ cursor: 'pointer' }} onClick={() => setShowNotifications(false)} />
               </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: '0.78rem', color: '#475569', display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {pendingApprovalsCount > 0 ? (
-                  <div style={{ padding: 10, background: '#fffbeb', borderRadius: 8, border: '1px solid #fde68a', color: '#92400e' }}>
-                    <strong>Action Required:</strong> {pendingApprovalsCount} pending recruit approval applications awaiting review.
+                  <div style={{ background: '#fffbeb', border: '1px solid #fde68a', padding: 8, borderRadius: 6, color: '#b45309' }}>
+                    ⚠️ {pendingApprovalsCount} recruit registration applications pending branch approval.
                   </div>
                 ) : (
-                  <div style={{ padding: 10, background: '#f8fafc', borderRadius: 8, color: '#64748b' }}>
-                    ✓ All notifications cleared. System operational across 12 branch hubs.
-                  </div>
+                  <div style={{ color: '#64748b' }}>No unread notifications. System operating normally.</div>
                 )}
               </div>
             </div>
@@ -128,9 +189,9 @@ export const TopNavbar = ({
         <button
           className="btn-secondary"
           onClick={onLogout}
-          style={{ padding: '6px 14px', fontSize: '0.82rem' }}
+          style={{ padding: '5px 12px', fontSize: '0.78rem' }}
         >
-          <LogOut size={15} /> Sign Out
+          <LogOut size={13} /> Sign Out
         </button>
       </div>
     </header>

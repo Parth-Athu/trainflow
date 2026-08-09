@@ -36,59 +36,59 @@ export const AchievementsView = ({ recruit, onNavigateTab }) => {
 
   const renderIcon = (iconName) => {
     switch (iconName) {
-      case 'Video': return <Video size={24} />;
-      case 'Tv': return <Tv size={24} />;
-      case 'Zap': return <Zap size={24} />;
-      case 'ShieldCheck': return <ShieldCheck size={24} />;
-      case 'Flame': return <Flame size={24} />;
-      case 'Target': return <Target size={24} />;
-      case 'FileCheck2': return <FileCheck2 size={24} />;
-      case 'Users': return <Users size={24} />;
-      case 'Award': return <Award size={24} />;
-      default: return <Trophy size={24} />;
+      case 'Video': return <Video size={20} />;
+      case 'Tv': return <Tv size={20} />;
+      case 'Zap': return <Zap size={20} />;
+      case 'ShieldCheck': return <ShieldCheck size={20} />;
+      case 'Flame': return <Flame size={20} />;
+      case 'Target': return <Target size={20} />;
+      case 'FileCheck2': return <FileCheck2 size={20} />;
+      case 'Users': return <Users size={20} />;
+      case 'Award': return <Award size={20} />;
+      default: return <Trophy size={20} />;
     }
   };
 
   return (
     <div className="page-container">
-      {/* HERO HERO LEVEL & XP BANNER */}
+      {/* COMPACT LEVEL & XP BANNER */}
       <div style={{
         background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
         color: '#ffffff',
-        borderRadius: 16,
-        padding: 32,
-        marginBottom: 28,
-        boxShadow: '0 10px 25px rgba(0,0,0,0.12)'
+        borderRadius: 14,
+        padding: '20px 24px',
+        marginBottom: 20,
+        boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.15)', padding: '4px 12px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 8 }}>
-              <Trophy size={14} /> GAMIFIED PROGRESSION SYSTEM
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.12)', padding: '3px 10px', borderRadius: 20, fontSize: '0.72rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 6 }}>
+              <Trophy size={13} /> GAMIFIED PROGRESSION SYSTEM
             </div>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#ffffff', margin: 0 }}>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
               Achievements & Badge Showcase
             </h2>
-            <div style={{ fontSize: '0.88rem', color: '#cbd5e1', marginTop: 4 }}>
+            <div style={{ fontSize: '0.82rem', color: '#cbd5e1', marginTop: 2 }}>
               Earn XP points and unlock official badges by completing video modules, checkpoints, and assessments!
             </div>
           </div>
 
-          <div style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 20px', borderRadius: 12, textAlign: 'right' }}>
-            <div style={{ fontSize: '0.75rem', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 700 }}>Total Badges Unlocked</div>
-            <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#10b981' }}>{unlockedCount} / {badgesList.length}</div>
+          <div style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', padding: '8px 16px', borderRadius: 10, textAlign: 'right' }}>
+            <div style={{ fontSize: '0.7rem', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 700 }}>Total Badges Unlocked</div>
+            <div style={{ fontSize: '1.45rem', fontWeight: 900, color: '#10b981' }}>{unlockedCount} / {badgesList.length}</div>
           </div>
         </div>
 
         {/* LEVEL PROGRESS BAR */}
-        <div style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 12, padding: 18, marginTop: 24 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', fontWeight: 800, color: '#fef08a', marginBottom: 6 }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Star size={16} fill="#fef08a" /> {levelName}
+        <div style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '12px 16px', marginTop: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 800, color: '#fef08a', marginBottom: 4 }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <Star size={14} fill="#fef08a" /> {levelName}
             </span>
             <span>{points} / {maxPoints} XP</span>
           </div>
-          <div style={{ height: 10, background: 'rgba(255,255,255,0.15)', borderRadius: 5, overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: `${levelPercent}%`, background: 'linear-gradient(90deg, #f59e0b 0%, #10b981 100%)', borderRadius: 5, transition: 'width 0.4s ease' }} />
+          <div style={{ height: 8, background: 'rgba(255,255,255,0.15)', borderRadius: 4, overflow: 'hidden' }}>
+            <div style={{ height: '100%', width: `${levelPercent}%`, background: 'linear-gradient(90deg, #f59e0b 0%, #10b981 100%)', borderRadius: 4, transition: 'width 0.4s ease' }} />
           </div>
         </div>
       </div>
@@ -96,69 +96,67 @@ export const AchievementsView = ({ recruit, onNavigateTab }) => {
       {/* DYNAMIC BADGES GRID */}
       <div className="section-header-row">
         <h3 className="section-title">
-          <Sparkles size={20} color="#4f46e5" /> Earned Badges ({unlockedCount} Unlocked)
+          <Sparkles size={18} color="#4f46e5" /> Earned Badges ({unlockedCount} Unlocked)
         </h3>
-        <span style={{ fontSize: '0.82rem', color: '#64748b' }}>
+        <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
           Complete video modules to trigger automatic badge unlock notifications!
         </span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 28 }}>
         {badgesList.map(badge => (
           <div
             key={badge.id}
             style={{
               background: badge.isUnlocked ? badge.bg : '#ffffff',
               border: `1px solid ${badge.isUnlocked ? badge.border : '#e2e8f0'}`,
-              borderRadius: 14,
-              padding: 20,
+              borderRadius: 12,
+              padding: 16,
               display: 'flex',
               flexDirection: 'column',
-              justify: 'space-between',
-              boxShadow: badge.isUnlocked ? '0 4px 12px rgba(0,0,0,0.06)' : '0 2px 4px rgba(0,0,0,0.02)',
-              opacity: badge.isUnlocked ? 1 : 0.65,
-              position: 'relative',
-              transition: 'all 0.2s ease'
+              justifyContent: 'space-between',
+              boxShadow: badge.isUnlocked ? '0 2px 6px rgba(0,0,0,0.04)' : 'none',
+              opacity: badge.isUnlocked ? 1 : 0.6,
+              transition: 'all 0.15s ease'
             }}
           >
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                 <div style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 12,
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
                   background: badge.isUnlocked ? badge.color : '#94a3b8',
                   color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
-                  justify: 'center',
-                  boxShadow: badge.isUnlocked ? `0 0 15px ${badge.color}40` : 'none'
+                  justify: 'center'
                 }}>
                   {renderIcon(badge.icon)}
                 </div>
 
                 <span className={`status-badge ${badge.isUnlocked ? 'status-completed' : 'status-locked'}`}>
-                  {badge.isUnlocked ? '✓ Unlocked' : <><Lock size={12} /> Locked</>}
+                  {badge.isUnlocked ? '✓ Unlocked' : <><Lock size={11} /> Locked</>}
                 </span>
               </div>
 
-              <div style={{ fontWeight: 800, fontSize: '1.05rem', color: '#0f172a', marginBottom: 4 }}>
+              <div style={{ fontWeight: 800, fontSize: '0.92rem', color: '#0f172a', marginBottom: 2 }}>
                 {badge.title}
               </div>
 
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: badge.color, textTransform: 'uppercase', marginBottom: 8, letterSpacing: 0.5 }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: badge.color, textTransform: 'uppercase', marginBottom: 6, letterSpacing: 0.4 }}>
                 {badge.category}
               </div>
 
-              <p style={{ fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.8rem', color: '#475569', lineHeight: 1.45 }}>
                 {badge.description}
               </p>
             </div>
 
-            <div style={{ marginTop: 16, paddingTop: 12, borderTop: `1px dashed ${badge.isUnlocked ? badge.border : '#e2e8f0'}`, fontSize: '0.78rem', color: '#64748b', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ marginTop: 12, paddingTop: 10, borderTop: `1px dashed ${badge.isUnlocked ? badge.border : '#e2e8f0'}`, fontSize: '0.74rem', color: '#64748b', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span>{badge.isUnlocked ? 'Status: Active Badge' : 'Requirement'}</span>
               <strong style={{ color: badge.isUnlocked ? badge.color : '#0f172a' }}>
-                {badge.isUnlocked ? 'Earned ✓' : 'Complete Video'}
+                {badge.isUnlocked ? 'Earned ✓' : 'Complete Module'}
               </strong>
             </div>
           </div>

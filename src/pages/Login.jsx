@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { 
-  Building2, 
+  BookOpen, 
+  GraduationCap, 
+  Award, 
   Users, 
+  Building2, 
+  UserCheck, 
   ShieldCheck, 
-  Layers, 
-  ArrowRight, 
+  Mail, 
+  Lock, 
   Eye, 
   EyeOff, 
-  Sparkles,
-  ChevronDown,
-  CheckCircle2,
-  Lock,
-  Mail,
-  Zap,
-  Globe,
-  Award,
-  UserCheck,
-  GraduationCap
+  ArrowRight, 
+  Sparkles, 
+  CheckCircle2, 
+  FileText, 
+  BarChart3 
 } from 'lucide-react';
 import { TrainFlowLogo } from '../components/TrainFlowLogo';
 
@@ -86,139 +85,105 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
       style={{
         minHeight: '100vh',
         width: '100%',
-        background: '#090d16',
-        color: '#ffffff',
+        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+        color: '#0f172a',
         display: 'flex',
         alignItems: 'center',
         justify: 'center',
         padding: '40px 20px',
-        position: 'relative',
-        overflow: 'hidden',
         fontFamily: "'Inter', system-ui, sans-serif"
       }}
     >
-      {/* PURE CSS AMBIENT BACKGROUND GRADIENT BLOBS */}
-      <div 
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '-5%',
-          width: 550,
-          height: 550,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(79,70,229,0.3) 0%, rgba(124,58,237,0.15) 55%, rgba(0,0,0,0) 80%)',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      <div 
-        style={{
-          position: 'absolute',
-          bottom: '-15%',
-          right: '-5%',
-          width: 600,
-          height: 600,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(79,70,229,0.15) 60%, rgba(0,0,0,0) 80%)',
-          filter: 'blur(90px)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      {/* MAIN TWO-COLUMN ENTERPRISE SAAS CARD */}
+      {/* MAIN ACADEMIC LEARNING PORTAL CARD */}
       <div 
         style={{
           width: '100%',
-          maxWidth: 1140,
+          maxWidth: 1120,
           display: 'grid',
           gridTemplateColumns: '44% 56%',
-          background: 'rgba(15, 23, 42, 0.85)',
-          backdropFilter: 'blur(25px)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          borderRadius: 24,
+          background: '#ffffff',
+          border: '1px solid #cbd5e1',
+          borderRadius: 20,
           overflow: 'hidden',
-          boxShadow: '0 30px 70px rgba(0, 0, 0, 0.6)',
-          position: 'relative',
-          zIndex: 1
+          boxShadow: '0 20px 50px rgba(15, 23, 42, 0.08)',
+          position: 'relative'
         }}
       >
-        {/* LEFT COLUMN: BRANDING & HACKATHON VALUE PROPOSITION */}
+        {/* LEFT COLUMN: ROYAL NAVY ACADEMIC PROPOSITION PANEL */}
         <div 
           style={{
-            background: 'linear-gradient(160deg, rgba(30, 27, 75, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
+            background: 'linear-gradient(160deg, #1e3a8a 0%, #0f172a 100%)',
+            color: '#ffffff',
             padding: 44,
             display: 'flex',
             flexDirection: 'column',
             justify: 'space-between',
-            borderRight: '1px solid rgba(255, 255, 255, 0.08)'
+            position: 'relative'
           }}
         >
           <div>
-            {/* BRAND LOGO HEADER */}
+            {/* BRAND LOGO */}
             <div style={{ marginBottom: 28 }}>
-              <TrainFlowLogo size={44} showText={true} textVariant="light" subtitle="ENTERPRISE ONBOARDING & CERTIFICATION" />
+              <TrainFlowLogo size={42} showText={true} textVariant="light" subtitle="ENTERPRISE LEARNING PORTAL" />
             </div>
 
-            {/* HACKATHON EVENT BADGE */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'linear-gradient(90deg, rgba(79, 70, 229, 0.3) 0%, rgba(16, 185, 129, 0.3) 100%)', border: '1px solid rgba(165, 180, 252, 0.3)', padding: '5px 14px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 16 }}>
-              <Sparkles size={14} /> ARENA 2026 — Techathon | IMS Ahmedabad
+            {/* ACADEMIC EVENT BADGE */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', padding: '5px 14px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 18 }}>
+              <GraduationCap size={16} /> ARENA 2026 — Techathon | IMS Ahmedabad
             </div>
 
-            <h1 style={{ fontSize: '1.95rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.25, marginBottom: 12 }}>
-              Automated Role-Based Onboarding Across <span style={{ background: 'linear-gradient(90deg, #818cf8 0%, #34d399 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>12 Indian Branch Hubs</span>
+            <h1 style={{ fontSize: '1.95rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.3, marginBottom: 12 }}>
+              Structured Role Onboarding & <span style={{ color: '#93c5fd' }}>Professional Certification</span>
             </h1>
 
-            <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: 28 }}>
-              Replaces manual training with a centralized 4-day digital workflow. Powered by an enterprise Rule Engine, anti-cheating assessment center, and manager certification desks.
+            <p style={{ fontSize: '0.88rem', color: '#cbd5e1', lineHeight: 1.6, marginBottom: 32 }}>
+              TrainFlow centralizes employee training across 12 branch hubs in India. Delivering role-tailored 4-day learning paths, interactive checkpoints, and manager-verified diplomas.
             </p>
 
-            {/* 3 VALUE CARDS */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: '#4f46e5', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Zap size={18} />
+            {/* 3 ACADEMIC STUDY VALUE CARDS */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 16, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,0.15)', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <BookOpen size={20} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#ffffff' }}>Role + Level Rule Engine</div>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Auto-assigns specialist sub-modules for each position.</div>
+                  <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#ffffff' }}>Structured 4-Day Curriculum</div>
+                  <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: 2 }}>Sequential day-by-day learning modules with prerequisite locks.</div>
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: '#10b981', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <ShieldCheck size={18} />
+              <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 16, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,0.15)', color: '#34d399', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Award size={20} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#ffffff' }}>Controlled Assessment Center</div>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Timer tracking, tab exit warning monitor, and question shuffle.</div>
+                  <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#ffffff' }}>Verified Diploma & Certificate</div>
+                  <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: 2 }}>Official manager-signed certificates with unique ID validation.</div>
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: '#7c3aed', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Award size={18} />
+              <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', padding: 16, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,0.15)', color: '#fef08a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <BarChart3 size={20} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#ffffff' }}>Branch Manager Certification</div>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Verified 100% eligibility check before issuing stable Certificate IDs.</div>
+                  <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#ffffff' }}>Skill Competency & Analytics</div>
+                  <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: 2 }}>Real-time readiness index tracking & assessment scoring.</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: 24, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between' }}>
             <span>Project Launchpad • 5-Member Team</span>
             <span>v4.0 Production</span>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: AUTHENTICATION FORM & DEMO PRESETS */}
-        <div style={{ padding: 44, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        {/* RIGHT COLUMN: CLEAN ACADEMIC SIGN IN FORM */}
+        <div style={{ padding: 44, display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#ffffff' }}>
           {/* TAB MODE SWITCHER */}
-          <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', padding: 4, borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', marginBottom: 24 }}>
+          <div style={{ display: 'flex', background: '#f1f5f9', padding: 4, borderRadius: 10, border: '1px solid #cbd5e1', marginBottom: 24 }}>
             <button
               onClick={() => setAuthMode('login')}
               style={{
@@ -226,15 +191,15 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 padding: '10px 0',
                 borderRadius: 8,
                 border: 'none',
-                background: authMode === 'login' ? '#4f46e5' : 'transparent',
-                color: '#ffffff',
+                background: authMode === 'login' ? '#1e3a8a' : 'transparent',
+                color: authMode === 'login' ? '#ffffff' : '#475569',
                 fontWeight: 800,
                 fontSize: '0.9rem',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.15s ease'
               }}
             >
-              Sign In
+              Sign In to Learning Portal
             </button>
 
             <button
@@ -244,15 +209,15 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 padding: '10px 0',
                 borderRadius: 8,
                 border: 'none',
-                background: authMode === 'register' ? '#4f46e5' : 'transparent',
-                color: '#ffffff',
+                background: authMode === 'register' ? '#1e3a8a' : 'transparent',
+                color: authMode === 'register' ? '#ffffff' : '#475569',
                 fontWeight: 800,
                 fontSize: '0.9rem',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.15s ease'
               }}
             >
-              Recruit Registration
+              New Recruit Registration
             </button>
           </div>
 
@@ -261,7 +226,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
             <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {/* ROLE SELECTION PILLS */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', marginBottom: 8, letterSpacing: 0.5 }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#1e3a8a', textTransform: 'uppercase', marginBottom: 8, letterSpacing: 0.5 }}>
                   Select Account Role:
                 </label>
 
@@ -270,11 +235,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                     type="button"
                     onClick={() => handleSelectRolePill('recruit')}
                     style={{
-                      padding: '8px 4px',
+                      padding: '10px 4px',
                       borderRadius: 10,
-                      border: `1px solid ${selectedRole === 'recruit' ? '#4f46e5' : 'rgba(255,255,255,0.12)'}`,
-                      background: selectedRole === 'recruit' ? 'rgba(79, 70, 229, 0.25)' : 'rgba(255,255,255,0.03)',
-                      color: selectedRole === 'recruit' ? '#ffffff' : '#94a3b8',
+                      border: `2px solid ${selectedRole === 'recruit' ? '#1e3a8a' : '#cbd5e1'}`,
+                      background: selectedRole === 'recruit' ? '#eff6ff' : '#f8fafc',
+                      color: selectedRole === 'recruit' ? '#1e3a8a' : '#475569',
                       fontWeight: 800,
                       fontSize: '0.78rem',
                       cursor: 'pointer',
@@ -285,7 +250,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <Users size={16} color={selectedRole === 'recruit' ? '#818cf8' : '#94a3b8'} />
+                    <BookOpen size={18} color={selectedRole === 'recruit' ? '#1e3a8a' : '#64748b'} />
                     <span>Recruit</span>
                   </button>
 
@@ -293,11 +258,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                     type="button"
                     onClick={() => handleSelectRolePill('manager')}
                     style={{
-                      padding: '8px 4px',
+                      padding: '10px 4px',
                       borderRadius: 10,
-                      border: `1px solid ${selectedRole === 'manager' ? '#4f46e5' : 'rgba(255,255,255,0.12)'}`,
-                      background: selectedRole === 'manager' ? 'rgba(79, 70, 229, 0.25)' : 'rgba(255,255,255,0.03)',
-                      color: selectedRole === 'manager' ? '#ffffff' : '#94a3b8',
+                      border: `2px solid ${selectedRole === 'manager' ? '#1e3a8a' : '#cbd5e1'}`,
+                      background: selectedRole === 'manager' ? '#eff6ff' : '#f8fafc',
+                      color: selectedRole === 'manager' ? '#1e3a8a' : '#475569',
                       fontWeight: 800,
                       fontSize: '0.78rem',
                       cursor: 'pointer',
@@ -308,7 +273,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <UserCheck size={16} color={selectedRole === 'manager' ? '#34d399' : '#94a3b8'} />
+                    <UserCheck size={18} color={selectedRole === 'manager' ? '#059669' : '#64748b'} />
                     <span>Manager</span>
                   </button>
 
@@ -316,11 +281,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                     type="button"
                     onClick={() => handleSelectRolePill('trainer')}
                     style={{
-                      padding: '8px 4px',
+                      padding: '10px 4px',
                       borderRadius: 10,
-                      border: `1px solid ${selectedRole === 'trainer' ? '#4f46e5' : 'rgba(255,255,255,0.12)'}`,
-                      background: selectedRole === 'trainer' ? 'rgba(79, 70, 229, 0.25)' : 'rgba(255,255,255,0.03)',
-                      color: selectedRole === 'trainer' ? '#ffffff' : '#94a3b8',
+                      border: `2px solid ${selectedRole === 'trainer' ? '#1e3a8a' : '#cbd5e1'}`,
+                      background: selectedRole === 'trainer' ? '#eff6ff' : '#f8fafc',
+                      color: selectedRole === 'trainer' ? '#1e3a8a' : '#475569',
                       fontWeight: 800,
                       fontSize: '0.78rem',
                       cursor: 'pointer',
@@ -331,7 +296,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <GraduationCap size={16} color={selectedRole === 'trainer' ? '#fbbf24' : '#94a3b8'} />
+                    <GraduationCap size={18} color={selectedRole === 'trainer' ? '#d97706' : '#64748b'} />
                     <span>Trainer</span>
                   </button>
 
@@ -339,11 +304,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                     type="button"
                     onClick={() => handleSelectRolePill('hr')}
                     style={{
-                      padding: '8px 4px',
+                      padding: '10px 4px',
                       borderRadius: 10,
-                      border: `1px solid ${selectedRole === 'hr' ? '#4f46e5' : 'rgba(255,255,255,0.12)'}`,
-                      background: selectedRole === 'hr' ? 'rgba(79, 70, 229, 0.25)' : 'rgba(255,255,255,0.03)',
-                      color: selectedRole === 'hr' ? '#ffffff' : '#94a3b8',
+                      border: `2px solid ${selectedRole === 'hr' ? '#1e3a8a' : '#cbd5e1'}`,
+                      background: selectedRole === 'hr' ? '#eff6ff' : '#f8fafc',
+                      color: selectedRole === 'hr' ? '#1e3a8a' : '#475569',
                       fontWeight: 800,
                       fontSize: '0.78rem',
                       cursor: 'pointer',
@@ -354,19 +319,19 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <Building2 size={16} color={selectedRole === 'hr' ? '#f472b6' : '#94a3b8'} />
+                    <Building2 size={18} color={selectedRole === 'hr' ? '#7c3aed' : '#64748b'} />
                     <span>HR Admin</span>
                   </button>
                 </div>
               </div>
 
-              {/* WORK EMAIL INPUT WITH LEFT ICON */}
+              {/* WORK EMAIL INPUT */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#334155', marginBottom: 6 }}>
                   Work Email Address
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <Mail size={18} style={{ position: 'absolute', left: 14, top: 13, color: '#94a3b8' }} />
+                  <Mail size={18} style={{ position: 'absolute', left: 14, top: 13, color: '#64748b' }} />
                   <input
                     type="email"
                     value={loginEmail}
@@ -377,23 +342,24 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       width: '100%',
                       padding: '12px 14px 12px 42px',
                       borderRadius: 10,
-                      background: 'rgba(30, 41, 59, 0.9)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      color: '#ffffff',
+                      background: '#f8fafc',
+                      border: '1px solid #cbd5e1',
+                      color: '#0f172a',
                       fontSize: '0.92rem',
+                      fontWeight: 600,
                       outline: 'none'
                     }}
                   />
                 </div>
               </div>
 
-              {/* PASSWORD INPUT WITH SHOW/HIDE EYE */}
+              {/* PASSWORD INPUT */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#334155', marginBottom: 6 }}>
                   Password
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <Lock size={18} style={{ position: 'absolute', left: 14, top: 13, color: '#94a3b8' }} />
+                  <Lock size={18} style={{ position: 'absolute', left: 14, top: 13, color: '#64748b' }} />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={loginPassword}
@@ -404,10 +370,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       width: '100%',
                       padding: '12px 42px 12px 42px',
                       borderRadius: 10,
-                      background: 'rgba(30, 41, 59, 0.9)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      color: '#ffffff',
+                      background: '#f8fafc',
+                      border: '1px solid #cbd5e1',
+                      color: '#0f172a',
                       fontSize: '0.92rem',
+                      fontWeight: 600,
                       outline: 'none'
                     }}
                   />
@@ -420,7 +387,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                       top: 12,
                       background: 'transparent',
                       border: 'none',
-                      color: '#94a3b8',
+                      color: '#64748b',
                       cursor: 'pointer'
                     }}
                   >
@@ -438,7 +405,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                   padding: 14,
                   borderRadius: 10,
                   border: 'none',
-                  background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                  background: '#1e3a8a',
                   color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '0.98rem',
@@ -447,23 +414,23 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                   alignItems: 'center',
                   justify: 'center',
                   gap: 8,
-                  boxShadow: '0 8px 20px rgba(79, 70, 229, 0.4)',
+                  boxShadow: '0 4px 14px rgba(30, 58, 138, 0.3)',
                   marginTop: 4,
-                  transition: 'transform 0.15s ease'
+                  transition: 'background 0.15s ease'
                 }}
               >
                 {isLoading ? (
-                  <span>Signing in to TrainFlow...</span>
+                  <span>Signing in...</span>
                 ) : (
                   <>
-                    Sign In to TrainFlow Portal <ArrowRight size={18} />
+                    Sign In to Learning Portal <ArrowRight size={18} />
                   </>
                 )}
               </button>
 
               {/* 1-CLICK QUICK DEMO PRESETS GRID */}
-              <div style={{ marginTop: 10, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', marginBottom: 10, letterSpacing: 0.5 }}>
+              <div style={{ marginTop: 10, paddingTop: 16, borderTop: '1px solid #e2e8f0' }}>
+                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#1e3a8a', textTransform: 'uppercase', marginBottom: 10, letterSpacing: 0.5 }}>
                   ⚡ 1-Click Quick Demo Presets:
                 </div>
 
@@ -471,37 +438,37 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                   <button
                     type="button"
                     onClick={() => { setSelectedRole('recruit'); setLoginEmail('priya.sharma@trainflow.io'); onQuickLoginPreset({ role: 'recruit', recruitId: 'R-01', name: 'Priya Sharma (R-01)' }); }}
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#ffffff' }}
+                    style={{ background: '#f8fafc', border: '1px solid #cbd5e1', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#0f172a' }}
                   >
-                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#818cf8' }}>Priya Sharma</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Recruit • Ahmedabad</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#1e3a8a' }}>Priya Sharma</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Recruit • Ahmedabad</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => { setSelectedRole('manager'); setLoginEmail('manager.ahmedabad@trainflow.io'); onQuickLoginPreset({ role: 'manager', name: 'Amit Shah (Branch Manager)' }); }}
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#ffffff' }}
+                    style={{ background: '#f8fafc', border: '1px solid #cbd5e1', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#0f172a' }}
                   >
-                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#34d399' }}>Amit Shah</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Branch Manager Hub</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#059669' }}>Amit Shah</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Branch Manager Hub</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => { setSelectedRole('trainer'); setLoginEmail('trainer@trainflow.io'); onQuickLoginPreset({ role: 'trainer', name: 'Regional Trainer' }); }}
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#ffffff' }}
+                    style={{ background: '#f8fafc', border: '1px solid #cbd5e1', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#0f172a' }}
                   >
-                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#fbbf24' }}>Regional Trainer</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Field Sign-offs</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#d97706' }}>Regional Trainer</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Field Sign-offs</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => { setSelectedRole('hr'); setLoginEmail('hr.admin@trainflow.io'); onQuickLoginPreset({ role: 'hr', name: 'HQ HR Operations' }); }}
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#ffffff' }}
+                    style={{ background: '#f8fafc', border: '1px solid #cbd5e1', padding: 10, borderRadius: 8, textAlign: 'left', cursor: 'pointer', color: '#0f172a' }}
                   >
-                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#f472b6' }}>HQ HR Admin</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>12 Hub Command</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#7c3aed' }}>HQ HR Admin</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>12 Hub Command</div>
                   </button>
                 </div>
               </div>
@@ -510,49 +477,49 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
             /* RECRUIT REGISTRATION FORM */
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Full Name</label>
-                <input type="text" value={regFullName} onChange={e => setRegFullName(e.target.value)} placeholder="e.g. Vikram Patel" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Full Name</label>
+                <input type="text" value={regFullName} onChange={e => setRegFullName(e.target.value)} placeholder="e.g. Vikram Patel" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }} />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Work Email</label>
-                  <input type="email" value={regEmail} onChange={e => setRegEmail(e.target.value)} placeholder="vikram@trainflow.io" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Work Email</label>
+                  <input type="email" value={regEmail} onChange={e => setRegEmail(e.target.value)} placeholder="vikram@trainflow.io" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Mobile</label>
-                  <input type="tel" value={regMobile} onChange={e => setRegMobile(e.target.value)} placeholder="+91 9876543210" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Mobile</label>
+                  <input type="tel" value={regMobile} onChange={e => setRegMobile(e.target.value)} placeholder="+91 9876543210" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }} />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Requested Role</label>
-                  <select value={regRequestedRole} onChange={e => setRegRequestedRole(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }}>
-                    <option value="Sales Executive" style={{ background: '#0f172a' }}>Sales Executive</option>
-                    <option value="Operations Associate" style={{ background: '#0f172a' }}>Operations Associate</option>
-                    <option value="Marketing Associate" style={{ background: '#0f172a' }}>Marketing Associate</option>
-                    <option value="Delivery Lead" style={{ background: '#0f172a' }}>Delivery Lead</option>
-                    <option value="Customer Support" style={{ background: '#0f172a' }}>Customer Support</option>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Requested Role</label>
+                  <select value={regRequestedRole} onChange={e => setRegRequestedRole(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }}>
+                    <option value="Sales Executive">Sales Executive</option>
+                    <option value="Operations Associate">Operations Associate</option>
+                    <option value="Marketing Associate">Marketing Associate</option>
+                    <option value="Delivery Lead">Delivery Lead</option>
+                    <option value="Customer Support">Customer Support</option>
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Branch Hub</label>
-                  <select value={regBranch} onChange={e => setRegBranch(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }}>
-                    <option value="Ahmedabad" style={{ background: '#0f172a' }}>Ahmedabad Hub</option>
-                    <option value="Surat" style={{ background: '#0f172a' }}>Surat Hub</option>
-                    <option value="Rajkot" style={{ background: '#0f172a' }}>Rajkot Hub</option>
-                    <option value="Vadodara" style={{ background: '#0f172a' }}>Vadodara Hub</option>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Branch Hub</label>
+                  <select value={regBranch} onChange={e => setRegBranch(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }}>
+                    <option value="Ahmedabad">Ahmedabad Hub</option>
+                    <option value="Surat">Surat Hub</option>
+                    <option value="Rajkot">Rajkot Hub</option>
+                    <option value="Vadodara">Vadodara Hub</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Password</label>
-                <input type="password" value={regPassword} onChange={e => setRegPassword(e.target.value)} placeholder="••••••••" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#334155', marginBottom: 4 }}>Password</label>
+                <input type="password" value={regPassword} onChange={e => setRegPassword(e.target.value)} placeholder="••••••••" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '0.88rem', fontWeight: 600 }} />
               </div>
 
-              <button type="submit" disabled={isLoading} style={{ width: '100%', padding: 12, borderRadius: 8, border: 'none', background: '#10b981', color: '#ffffff', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', marginTop: 4 }}>
+              <button type="submit" disabled={isLoading} style={{ width: '100%', padding: 12, borderRadius: 8, border: 'none', background: '#059669', color: '#ffffff', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', marginTop: 4 }}>
                 Submit Application for Manager Review
               </button>
             </form>

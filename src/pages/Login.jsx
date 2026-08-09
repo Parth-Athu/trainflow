@@ -85,12 +85,16 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
       style={{
         minHeight: '100vh',
         width: '100%',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+        backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 58, 138, 0.65) 100%), url('public/login_bg.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         color: '#0f172a',
         display: 'flex',
         alignItems: 'center',
         justify: 'center',
         padding: '40px 20px',
+        position: 'relative',
         fontFamily: "'Inter', system-ui, sans-serif"
       }}
     >
@@ -102,11 +106,12 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
           display: 'grid',
           gridTemplateColumns: '44% 56%',
           background: '#ffffff',
-          border: '1px solid #cbd5e1',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
           borderRadius: 20,
           overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(15, 23, 42, 0.08)',
-          position: 'relative'
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.4)',
+          position: 'relative',
+          zIndex: 1
         }}
       >
         {/* LEFT COLUMN: ROYAL NAVY ACADEMIC PROPOSITION PANEL */}

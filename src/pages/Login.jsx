@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   Building2, 
   Users, 
@@ -16,10 +16,8 @@ import {
   Globe,
   Award,
   UserCheck,
-  GraduationCap,
-  KeyRound
+  GraduationCap
 } from 'lucide-react';
-import gsap from 'gsap';
 import { TrainFlowLogo } from '../components/TrainFlowLogo';
 
 export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset }) => {
@@ -40,64 +38,6 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
   const [regRequestedRole, setRegRequestedRole] = useState('Sales Executive');
   const [regRequestedLevel, setRegRequestedLevel] = useState('Junior');
   const [regBranch, setRegBranch] = useState('Ahmedabad');
-
-  const containerRef = useRef(null);
-  const blob1Ref = useRef(null);
-  const blob2Ref = useRef(null);
-  const blob3Ref = useRef(null);
-
-  // GSAP BACKGROUND & STAGGER ENTRANCE ANIMATIONS
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Ambient floating blobs background motion
-      gsap.to(blob1Ref.current, {
-        y: 40,
-        x: -25,
-        rotation: 12,
-        duration: 9,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-      gsap.to(blob2Ref.current, {
-        y: -45,
-        x: 35,
-        rotation: -15,
-        duration: 11,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-      gsap.to(blob3Ref.current, {
-        scale: 1.2,
-        duration: 8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
-      });
-
-      // Stagger entrance animation for content cards
-      gsap.from('.gsap-animate-card', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out'
-      });
-
-      // Header logo pulse
-      gsap.from('.gsap-logo', {
-        scale: 0.85,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'back.out(1.7)'
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [authMode]);
 
   // Handle Account Type Pill Selection
   const handleSelectRolePill = (roleKey) => {
@@ -120,7 +60,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
     setTimeout(() => {
       setIsLoading(false);
       onLoginSuccess(loginEmail, loginPassword, selectedRole);
-    }, 600);
+    }, 500);
   };
 
   // Submit Registration Handler
@@ -138,12 +78,11 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
         requestedLevel: regRequestedLevel,
         city: regBranch
       });
-    }, 700);
+    }, 600);
   };
 
   return (
     <div 
-      ref={containerRef}
       style={{
         minHeight: '100vh',
         width: '100%',
@@ -158,9 +97,8 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
         fontFamily: "'Inter', system-ui, sans-serif"
       }}
     >
-      {/* GSAP FLOATING AMBIENT BACKGROUND BLOBS */}
+      {/* PURE CSS AMBIENT BACKGROUND GRADIENT BLOBS */}
       <div 
-        ref={blob1Ref}
         style={{
           position: 'absolute',
           top: '-10%',
@@ -168,7 +106,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
           width: 550,
           height: 550,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(79,70,229,0.35) 0%, rgba(124,58,237,0.18) 55%, rgba(0,0,0,0) 80%)',
+          background: 'radial-gradient(circle, rgba(79,70,229,0.3) 0%, rgba(124,58,237,0.15) 55%, rgba(0,0,0,0) 80%)',
           filter: 'blur(80px)',
           pointerEvents: 'none',
           zIndex: 0
@@ -176,7 +114,6 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
       />
 
       <div 
-        ref={blob2Ref}
         style={{
           position: 'absolute',
           bottom: '-15%',
@@ -184,24 +121,8 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
           width: 600,
           height: 600,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(16,185,129,0.28) 0%, rgba(79,70,229,0.18) 60%, rgba(0,0,0,0) 80%)',
+          background: 'radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(79,70,229,0.15) 60%, rgba(0,0,0,0) 80%)',
           filter: 'blur(90px)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      <div 
-        ref={blob3Ref}
-        style={{
-          position: 'absolute',
-          top: '30%',
-          left: '42%',
-          width: 450,
-          height: 450,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(236,72,153,0.18) 0%, rgba(0,0,0,0) 70%)',
-          filter: 'blur(100px)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -237,26 +158,26 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
         >
           <div>
             {/* BRAND LOGO HEADER */}
-            <div className="gsap-logo" style={{ marginBottom: 28 }}>
+            <div style={{ marginBottom: 28 }}>
               <TrainFlowLogo size={44} showText={true} textVariant="light" subtitle="ENTERPRISE ONBOARDING & CERTIFICATION" />
             </div>
 
             {/* HACKATHON EVENT BADGE */}
-            <div className="gsap-animate-card" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'linear-gradient(90deg, rgba(79, 70, 229, 0.3) 0%, rgba(16, 185, 129, 0.3) 100%)', border: '1px solid rgba(165, 180, 252, 0.3)', padding: '5px 14px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 16 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'linear-gradient(90deg, rgba(79, 70, 229, 0.3) 0%, rgba(16, 185, 129, 0.3) 100%)', border: '1px solid rgba(165, 180, 252, 0.3)', padding: '5px 14px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 800, color: '#fef08a', textTransform: 'uppercase', marginBottom: 16 }}>
               <Sparkles size={14} /> ARENA 2026 — Techathon | IMS Ahmedabad
             </div>
 
-            <h1 className="gsap-animate-card" style={{ fontSize: '1.95rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.25, marginBottom: 12 }}>
+            <h1 style={{ fontSize: '1.95rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.25, marginBottom: 12 }}>
               Automated Role-Based Onboarding Across <span style={{ background: 'linear-gradient(90deg, #818cf8 0%, #34d399 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>12 Indian Branch Hubs</span>
             </h1>
 
-            <p className="gsap-animate-card" style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: 28 }}>
+            <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: 28 }}>
               Replaces manual training with a centralized 4-day digital workflow. Powered by an enterprise Rule Engine, anti-cheating assessment center, and manager certification desks.
             </p>
 
             {/* 3 VALUE CARDS */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: '#4f46e5', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Zap size={18} />
                 </div>
@@ -266,7 +187,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 </div>
               </div>
 
-              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: '#10b981', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <ShieldCheck size={18} />
                 </div>
@@ -276,7 +197,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 </div>
               </div>
 
-              <div className="gsap-animate-card" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 14, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: '#7c3aed', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Award size={18} />
                 </div>
@@ -297,7 +218,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
         {/* RIGHT COLUMN: AUTHENTICATION FORM & DEMO PRESETS */}
         <div style={{ padding: 44, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           {/* TAB MODE SWITCHER */}
-          <div className="gsap-animate-card" style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', padding: 4, borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', marginBottom: 24 }}>
+          <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', padding: 4, borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', marginBottom: 24 }}>
             <button
               onClick={() => setAuthMode('login')}
               style={{
@@ -339,7 +260,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
             /* SIGN IN FORM */
             <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {/* ROLE SELECTION PILLS */}
-              <div className="gsap-animate-card">
+              <div>
                 <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', marginBottom: 8, letterSpacing: 0.5 }}>
                   Select Account Role:
                 </label>
@@ -440,7 +361,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
               </div>
 
               {/* WORK EMAIL INPUT WITH LEFT ICON */}
-              <div className="gsap-animate-card">
+              <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
                   Work Email Address
                 </label>
@@ -467,7 +388,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
               </div>
 
               {/* PASSWORD INPUT WITH SHOW/HIDE EYE */}
-              <div className="gsap-animate-card">
+              <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 6 }}>
                   Password
                 </label>
@@ -512,7 +433,6 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
               <button
                 type="submit"
                 disabled={isLoading}
-                className="gsap-animate-card"
                 style={{
                   width: '100%',
                   padding: 14,
@@ -542,7 +462,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
               </button>
 
               {/* 1-CLICK QUICK DEMO PRESETS GRID */}
-              <div className="gsap-animate-card" style={{ marginTop: 10, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ marginTop: 10, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#a5b4fc', textTransform: 'uppercase', marginBottom: 10, letterSpacing: 0.5 }}>
                   ⚡ 1-Click Quick Demo Presets:
                 </div>
@@ -589,12 +509,12 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
           ) : (
             /* RECRUIT REGISTRATION FORM */
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div className="gsap-animate-card">
+              <div>
                 <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Full Name</label>
                 <input type="text" value={regFullName} onChange={e => setRegFullName(e.target.value)} placeholder="e.g. Vikram Patel" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }} className="gsap-animate-card">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Work Email</label>
                   <input type="email" value={regEmail} onChange={e => setRegEmail(e.target.value)} placeholder="vikram@trainflow.io" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
@@ -605,7 +525,7 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }} className="gsap-animate-card">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Requested Role</label>
                   <select value={regRequestedRole} onChange={e => setRegRequestedRole(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }}>
@@ -627,12 +547,12 @@ export const Login = ({ onLoginSuccess, onRegisterSuccess, onQuickLoginPreset })
                 </div>
               </div>
 
-              <div className="gsap-animate-card">
+              <div>
                 <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, color: '#cbd5e1', marginBottom: 4 }}>Password</label>
                 <input type="password" value={regPassword} onChange={e => setRegPassword(e.target.value)} placeholder="••••••••" required style={{ width: '100%', padding: '10px 12px', borderRadius: 8, background: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.88rem' }} />
               </div>
 
-              <button type="submit" disabled={isLoading} className="gsap-animate-card" style={{ width: '100%', padding: 12, borderRadius: 8, border: 'none', background: '#10b981', color: '#ffffff', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', marginTop: 4 }}>
+              <button type="submit" disabled={isLoading} style={{ width: '100%', padding: 12, borderRadius: 8, border: 'none', background: '#10b981', color: '#ffffff', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', marginTop: 4 }}>
                 Submit Application for Manager Review
               </button>
             </form>
